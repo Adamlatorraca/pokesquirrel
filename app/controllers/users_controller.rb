@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     end
 
     get '/signup' do
+        redirect_if_logged_in
         erb :'users/new'
     end
 
@@ -21,6 +22,7 @@ class UsersController < ApplicationController
     end
 
     get '/login' do
+        redirect_if_logged_in
         erb :'users/login'
     end
 
