@@ -5,4 +5,18 @@ class UsersController < ApplicationController
         enable :sessions
         set :session_secret, ENV['SECRET']
     end
+
+    get '/signup' do
+        erb :'users/new'
+    end
+
+    post '/signup' do
+        user = User.new(params[:user])
+        if user.save
+            session[:user_id] = user.id
+            redirect to '/squirrels'
+        else
+            erb :'users/new'
+        end
+    end
 end
