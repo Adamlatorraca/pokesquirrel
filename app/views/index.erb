@@ -1,1 +1,11 @@
 <h1> Welcome! </h1>
+<% if logged_in? %>
+
+<a href="/squirrels"> View Collection </a>
+<a href="/logout"> Log Out </a>
+<p>Welcome, <%=current_user.username %></p>
+
+<% else %>
+<a href="/signup">Sign Up</a>
+<a href="/login"> Sign In </a>
+<% end %>
