@@ -1,0 +1,6 @@
+  <%= @squirrel.name %><br />
+  <%= @squirrel.fur_color %> <br />
+  Owner: <a href="/squirrels/<%=@squirrel.user.id%>"><%= @squirrel.user.username %></a> <br />
+  <a href="/clubs/<%=@club.id%>/edit">Edit</a>
+  <br />
+  <br />
