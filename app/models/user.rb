@@ -4,6 +4,6 @@ class User < ActiveRecord::Base
     validates :email, presence: true
     validates :password, presence: true
     validates :username, uniqueness: true
-    validates :email, uniquenss: true
+    validates :email, uniqueness: true
     has_many :squirrels
 end
