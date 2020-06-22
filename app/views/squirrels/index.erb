@@ -1,7 +1,8 @@
 <% if logged_in? %>
-  <h2> You are Logged in <%= current_user.username %> </h2>
-<% end %>
-<h1>All the Squirrels</h1>
+
+<h1><%= current_user.username %>'s Collection</h1>
+<a href="/squirrels/new">Add a new pokesquirrel!</a>
 <% @squirrels.each do |squirrel| %>
     <h3> <a href="/squirrels/<%= squirrel.id %>"><%= squirrel.name %> </a> </h3>
+<% end %>
 <% end %>
