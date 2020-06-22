@@ -1,8 +1,10 @@
-<% if logged_in? %>
-
-<h1><%= current_user.username %>'s Collection</h1>
-<a href="/squirrels/new">Add a new pokesquirrel!</a>
-<% @squirrels.each do |squirrel| %>
-    <h3> <a href="/squirrels/<%= squirrel.id %>"><%= squirrel.name %> </a> </h3>
-<% end %>
+<h1><%= @user.username %>'s Collection</h1>
+<a href="/squirrels/new">Add a new Squirrel!</a>
+<% @user.squirrels.each do |squirrel| %>
+  <%= squirrel.name %><br />
+  <%= squirrel.fur_color %> <br />
+  <%= squirrel.mood %> <br />
+  <a href="/squirrels/<%=squirrel.id%>/edit">Edit</a><a href="/squirrel/<%=club.id%>/edit">Edit</a>
+  <br />
+  <br />
 <% end %>
