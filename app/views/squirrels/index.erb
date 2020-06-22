@@ -1,0 +1,10 @@
+<h1>All the Squirrels</h1>
+
+<% if logged_in? %>
+  <h2> You are Logged in <%= current_user.username %> </h2>
+   <a href="/logout">Log out here </a>
+<% end %>
+
+<% @squirrels.each do |squirrel| %>
+    <h3> <a href="/squirrels/<%= squirrel.id %>"><%= squirrel.name %> </a> </h3>
+<% end %>
