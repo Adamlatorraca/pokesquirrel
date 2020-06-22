@@ -7,16 +7,16 @@ class UsersController < ApplicationController
     end
 
     get '/signup' do
-        erb :'users/new'
+        erb :'users/signup'
     end
 
     post '/signup' do
         user = User.new(params[:user])
         if user.save
             session[:user_id] = user.id
-            redirect to '/squirrels'
+            redirect to '/users/:id'
         else
-            erb :'users/new'
+            erb :'users/signup'
         end
     end
 
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
         user = User.find_by_username(params[:user][:username])
         if user && user.authenticate(params[:user][:password])
             session[:user_id] = user.id
-            redirect to '/squirrels'
+            redirect to '/profile'
         else
             redirect to '/login'
         end
