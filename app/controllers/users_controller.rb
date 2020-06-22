@@ -19,4 +19,18 @@ class UsersController < ApplicationController
             erb :'users/new'
         end
     end
+
+    get '/login' do
+        erb :'users/login'
+    end
+
+    post '/login' do
+        user = User.find_by_username(params[:user][:username])
+        if user && user.authenticate(params[:user][:password])
+            session[:user_id] = user.id
+            redirect to '/squirrels'
+        else
+            redirect to '/login'
+        end
+    end
 end
