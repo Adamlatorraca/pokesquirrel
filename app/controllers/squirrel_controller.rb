@@ -1,0 +1,3 @@
+class SquirrelController < ApplicationController
+    
+end
