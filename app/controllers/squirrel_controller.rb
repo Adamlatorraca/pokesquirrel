@@ -1,13 +1,8 @@
 class SquirrelController < ApplicationController
     get '/squirrels' do
         redirect_if_not_logged_in
-        if logged_in?
-            redirect to '/users/:id'
-        end
-    end
-    get '/squirrels/new' do
-        redirect_if_not_logged_in
-        erb :'squirrels/new'
+        @squirrels = Squirrel.all
+        erb :'squirrels/index'
     end
 
     post '/squirrels' do
@@ -18,6 +13,11 @@ class SquirrelController < ApplicationController
         end
         @squirrel.save
         redirect to '/squirrels/#{@squirrel.id}'
+    end
+
+    get '/squirrels/new' do
+        redirect_if_not_logged_in
+        erb :'squirrels/new'
     end
 
     get "/squirrels/:id" do
