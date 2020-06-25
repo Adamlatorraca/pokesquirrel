@@ -1,23 +1,13 @@
-<% if logged_in? %>
-    <h2>Welcome, <%= current_user.username %><br>
-    <a href="/squirrels/new">Add a new Squirrel!</a>
-<% end %>
-<br>
-<br>
-<h1>Browse the newest squirrels!</h1>
-<% @squirrels.each do |squirrel| %>
-  <strong>Owner Username:</strong> <%= squirrel.user.username %><br />
-  <strong>Squirrel's Name:</strong> <%= squirrel.name %><br />
-  <strong>Fur Color:</strong> <%= squirrel.fur_color %> <br />
-  <strong>Mood:</strong><%= squirrel.mood %> <br />
-  <form>
-    <input type="hidden" id="hidden" name="_method" value="delete" />
-    <input type="submit" value="Delete Squirrel" id="delete" />
-  </form>
-  </form>
-    <form action="/squirrel/<%=squirrel.id%>/edit" method="get">
-      <input type="submit" name="submit" value="Edit squirrel">
-    </form>
-  <br>
-  <br>
-<% end %>
+<h1>Show Page</h1>
+
+<strong>Squirrel's Name:</strong> <%= @squirrel.name %><br />
+<strong>Fur Color:</strong> <%= @squirrel.fur_color %> <br />
+<strong>Mood: </strong><%= @squirrel.mood %> <br />
+
+<a href="/squirrels/<%=  @squirrel.id  %>/edit">Edit this squirrel</a>
+
+<form action="/squirrels/<%=  @squirrel.id  %>" method="POST">
+  <input type="hidden" value="DELETE"  name="_method">
+  <input type="submit" value="Delete">
+
+</form>

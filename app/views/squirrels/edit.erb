@@ -1,0 +1,18 @@
+<h1>Edit <%= @squirrel.name %></h1>
+
+<form action="/squirrels/<%=@squirrel.id %>" method="POST">
+<input type="hidden" name="_method" value="PATCH">
+
+<label> Squirrel Name: </label>
+<input type="text" name="squirrel[name]" value="<%=@squirrel.name %>">
+<br>
+<label> Fur Color: </label>
+<input type="text" name="squirrel[fur_color]" value="<%=@squirrel.fur_color%>">
+<br>
+<label> Mood: </label>
+<input type="text" name="squirrel[mood]" value="<%=@squirrel.mood%>">
+<br>
+    
+
+  <input type="submit" value="Update">
+</form>
