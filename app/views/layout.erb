@@ -15,9 +15,6 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
-    <% if logged_in? %>
-    <h2>Welcome, <%= current_user.username %>
-    <% end %>
     <div class="wrapper">
 
         <%= yield %>

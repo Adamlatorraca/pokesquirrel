@@ -2,17 +2,8 @@ class SquirrelController < ApplicationController
     get '/squirrels' do
         redirect_if_not_logged_in
         @squirrels = Squirrel.all
-        erb :'squirrels/index'
-    end
-
-    post '/squirrels' do
-        redirect_if_not_logged_in
-        @squirrel = Squirrel.new(params)
-        if @squirrel.valid_params?(params)
-            redirect to '/squirrels/new'
-        end
-        @squirrel.save
-        redirect to '/squirrels/#{@squirrel.id}'
+        @users = User.all
+        erb :'squirrels/show'
     end
 
     get '/squirrels/new' do
@@ -20,10 +11,13 @@ class SquirrelController < ApplicationController
         erb :'squirrels/new'
     end
 
-    get "/squirrels/:id" do
+    post '/squirrels' do
         redirect_if_not_logged_in
-        @squirrel = Squirrel.find(params[:id])
-        erb :'squirrel/show'
+        if Squirrel.valid_params?(params)
+            redirect to '/squirrels/new'
+        end
+        current_user.squirrels.create(params[:squirrel])
+        redirect to '/squirrels'
     end
 
     get '/squirrels/:id/edit' do
@@ -32,5 +26,11 @@ class SquirrelController < ApplicationController
         erb :'squirrels/edit'
     end
 
+    post '/squirrels/:id' do
 
+    end
+
+# finish edit route
+# finish delete route
+# fix homepage weirdness
 end
