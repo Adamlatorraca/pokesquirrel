@@ -33,13 +33,9 @@ class SquirrelController < ApplicationController
 
     patch '/squirrels/:id' do
         redirect_if_not_logged_in
-        squirrel = Squirrel.find(params[:id])
-        if Squirrel.valid_params?(params)
-            squirrel.update(name: params[:name], fur_color: params[:fur_color], mood: params[:mood])
-            redirect to '/squirrels/#{squirrel.id}'
-        else
-            redirect to '/squirrels/:id/edit'
-        end
+        @squirrel = Squirrel.find(params[:id])
+        @squirrel.update(params[:squirrel])
+        redirect to "/squirrels/#{@squirrel.id}"
     end
 
     delete '/squirrels/:id' do
@@ -49,7 +45,5 @@ class SquirrelController < ApplicationController
         redirect to '/squirrels'
     end
 
-# finish edit route
-# finish delete route
-# fix homepage weirdness
+# finish edit
 end

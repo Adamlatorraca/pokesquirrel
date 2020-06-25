@@ -1,6 +1,6 @@
 <h1>Edit <%= @squirrel.name %></h1>
 
-<form action="/squirrels/<%=@squirrel.id %>" method="POST">
+<form action="/squirrels/<%= @squirrel.id %>" method="POST">
 <input type="hidden" name="_method" value="PATCH">
 
 <label> Squirrel Name: </label>
@@ -14,5 +14,5 @@
 <br>
     
 
-  <input type="submit" value="Update">
+  <input type="submit" value="Update Squirrel">
 </form>
