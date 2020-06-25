@@ -14,7 +14,13 @@ class SquirrelController < ApplicationController
     get '/squirrels/:id/edit' do
         redirect_if_not_logged_in
         @squirrel = Squirrel.find(params[:id])
-        erb :'squirrels/edit'
+        @user = @squirrel.user
+        if @user == current_user
+            erb :'squirrels/edit'
+        else
+            redirect to '/squirrels'
+        end
+        
     end
 
     get '/squirrels/:id' do
@@ -41,8 +47,13 @@ class SquirrelController < ApplicationController
     delete '/squirrels/:id' do
         redirect_if_not_logged_in
         @squirrel = Squirrel.find(params[:id])
-        @squirrel.destroy
-        redirect to '/squirrels'
+        @user = @squirrel.user
+        if @user == current_user
+            @squirrel.destroy
+            redirect to '/squirrels'
+        else
+            redirect to '/squirrels'
+        end
     end
 
 # finish edit
