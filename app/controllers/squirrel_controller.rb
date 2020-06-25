@@ -55,6 +55,4 @@ class SquirrelController < ApplicationController
             redirect to '/squirrels'
         end
     end
-
-# finish edit
 end
