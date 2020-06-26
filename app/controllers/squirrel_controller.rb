@@ -14,8 +14,7 @@ class SquirrelController < ApplicationController
     get '/squirrels/:id/edit' do
         redirect_if_not_logged_in
         @squirrel = Squirrel.find(params[:id])
-        @user = @squirrel.user
-        if @user == current_user
+        if @squirrel.user == current_user
             erb :'squirrels/edit'
         else
             redirect to '/squirrels'
@@ -30,9 +29,9 @@ class SquirrelController < ApplicationController
 
     post '/squirrels' do
         redirect_if_not_logged_in
-        #if !Squirrel.valid_params?(params)
-        #    redirect to '/squirrels/new'
-        #end
+        if !Squirrel.valid_params?(params) || params[:squirrel][:img_link] == ""
+            redirect to '/squirrels/new'
+        end
         current_user.squirrels.create(params[:squirrel])
         redirect to '/squirrels'
     end
@@ -40,15 +39,21 @@ class SquirrelController < ApplicationController
     patch '/squirrels/:id' do
         redirect_if_not_logged_in
         @squirrel = Squirrel.find(params[:id])
-        @squirrel.update(name: params[:squirrel][:name], fur_color: params[:squirrel][:fur_color], mood: params[:squirrel][:mood])
-        redirect to "/squirrels/#{@squirrel.id}"
+        user = @squirrel.user
+        #if params[:squirrel][:name] != "" && params[:squirrel][:fur_color] != "" && params[:squirrel][:mood] != "" && user == current_user
+        if Squirrel.valid_params?(params) && user == current_user    
+            @squirrel.update(params[:squirrel])
+            redirect to "/squirrels/#{@squirrel.id}"
+        else
+            redirect to '/squirrels'
+        end
     end
 
     delete '/squirrels/:id' do
         redirect_if_not_logged_in
         @squirrel = Squirrel.find(params[:id])
-        @user = @squirrel.user
-        if @user == current_user
+        user = @squirrel.user
+        if user == current_user
             @squirrel.destroy
             redirect to '/squirrels'
         else
