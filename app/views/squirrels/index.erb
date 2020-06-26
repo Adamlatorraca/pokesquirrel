@@ -6,6 +6,7 @@
 <br>
 <h1>Browse the newest squirrels!</h1>
 <% @squirrels.each do |squirrel| %>
+  <img src="<%= squirrel.img_link %>" alt="<% squirrel.name %>" style="width:128px;height:128px;"><br />
   <strong>Owner Username:</strong> <%= squirrel.user.username %><br />
   <strong>Squirrel's Name:</strong> <%= squirrel.name %><br />
   <strong>Fur Color:</strong> <%= squirrel.fur_color %> <br />

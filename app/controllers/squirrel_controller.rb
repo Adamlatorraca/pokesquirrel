@@ -1,8 +1,8 @@
 class SquirrelController < ApplicationController
     get '/squirrels' do
         redirect_if_not_logged_in
-        @squirrels = Squirrel.all
-        @users = User.all
+        @squirrels = Squirrel.all.includes(:user)
+        #@users = User.all Don't want to surface
         erb :'squirrels/index'
     end
 
@@ -30,9 +30,9 @@ class SquirrelController < ApplicationController
 
     post '/squirrels' do
         redirect_if_not_logged_in
-        if Squirrel.valid_params?(params)
-            redirect to '/squirrels/new'
-        end
+        #if !Squirrel.valid_params?(params)
+        #    redirect to '/squirrels/new'
+        #end
         current_user.squirrels.create(params[:squirrel])
         redirect to '/squirrels'
     end
@@ -40,7 +40,7 @@ class SquirrelController < ApplicationController
     patch '/squirrels/:id' do
         redirect_if_not_logged_in
         @squirrel = Squirrel.find(params[:id])
-        @squirrel.update(params[:squirrel])
+        @squirrel.update(name: params[:squirrel][:name], fur_color: params[:squirrel][:fur_color], mood: params[:squirrel][:mood])
         redirect to "/squirrels/#{@squirrel.id}"
     end
 
