@@ -20,3 +20,16 @@ Here is placeholder text that will be replaced with a link to my blog post
 ## Usage
 
 To use this app, just clone, run `rake db:migrate`, and then run `shotgun`.
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/Adamlatorraca/cs_pistols. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/Adamlatorraca/cs_pistols/blob/master/CODE_OF_CONDUCT.md).
+
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## Code of Conduct
+
+Everyone interacting in the CsPistols project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/Adamlatorraca/cs_pistols/blob/master/CODE_OF_CONDUCT.md).
