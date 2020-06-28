@@ -11,7 +11,7 @@ Specs:
 - [x] Ensure that users can't modify content created by other users - The logged in user is checked against the Squirrel's owner to confirm ownership before a Squirrel can be edited or delted
 - [x] Include user input validations - Users cannot enter blank information into the forms.
 - [ ] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new) - no error messages in this version, but there is error handling for invalid routes.
-- [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+- [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code - Readme has all required parts and placeholder text for my blog and video demo links.
 
 Confirm
 - [x] You have a large number of small Git commits
