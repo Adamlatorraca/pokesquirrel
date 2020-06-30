@@ -30,7 +30,9 @@ class UsersController < ApplicationController
             session[:user_id] = user.id
             redirect to '/squirrels'
         else
-            redirect to '/login'
+            @error = "Error!"
+            erb :'users/login'
+            # if you have a form error, you must re-render the form
         end
     end
 
