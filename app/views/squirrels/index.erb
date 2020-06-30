@@ -1,7 +1,6 @@
 <% if logged_in? %>
     <h2>Welcome, <%= current_user.username %><br>
     <a href="/squirrels/new">Add a new Squirrel!</a>
-<% end %>
 <br>
 <br>
 <h1>Browse the newest squirrels!</h1>
@@ -11,9 +10,8 @@
   <strong>Squirrel's Name:</strong> <%= squirrel.name %><br />
   <strong>Fur Color:</strong> <%= squirrel.fur_color %> <br />
   <strong>Mood: </strong><%= squirrel.mood %> <br />
-  <% if current_user == squirrel.user%>
-  <a href='/squirrels/<%=squirrel.id%>'>Edit or delete</a>
-  <% end %>
+  <a href='/squirrels/<%=squirrel.id%>'>See more info</a>
   <br>
   <br>
+<% end %>
 <% end %>
