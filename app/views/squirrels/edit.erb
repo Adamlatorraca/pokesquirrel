@@ -1,3 +1,4 @@
+<% if authorized? %>
 <h1>Edit <%= @squirrel.name %></h1>
 
 <form action="/squirrels/<%= @squirrel.id %>" method="POST">
@@ -16,3 +17,4 @@
 
   <input type="submit" value="Update Squirrel">
 </form>
+<% end %>
