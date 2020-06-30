@@ -1,8 +1,7 @@
 class SquirrelController < ApplicationController
     get '/squirrels' do
         redirect_if_not_logged_in
-        @squirrels = Squirrel.all.includes(:user)
-        #@users = User.all Don't want to surface
+        all_squirrels
         erb :'squirrels/index'
     end
 
@@ -12,52 +11,85 @@ class SquirrelController < ApplicationController
     end
 
     get '/squirrels/:id/edit' do
-        redirect_if_not_logged_in
-        @squirrel = Squirrel.find(params[:id])
-        if @squirrel.user == current_user
-            erb :'squirrels/edit'
-        else
-            redirect to '/squirrels'
-        end
-        
+        find_or_redirect_if_not_authorized
+        erb :'squirrels/edit'
     end
 
     get '/squirrels/:id' do
-        @squirrel = Squirrel.find(params[:id])
+        find_or_redirect_if_not_logged_in
         erb :'squirrels/show'
     end
 
     post '/squirrels' do
-        redirect_if_not_logged_in
-        if !Squirrel.valid_params?(params) || params[:squirrel][:img_link] == ""
-            redirect to '/squirrels/new'
-        end
-        current_user.squirrels.create(params[:squirrel])
+        create_squirrel
         redirect to '/squirrels'
     end
 
     patch '/squirrels/:id' do
-        redirect_if_not_logged_in
-        @squirrel = Squirrel.find(params[:id])
-        user = @squirrel.user
-        #if params[:squirrel][:name] != "" && params[:squirrel][:fur_color] != "" && params[:squirrel][:mood] != "" && user == current_user
-        if Squirrel.valid_params?(params) && user == current_user    
-            @squirrel.update(params[:squirrel])
-            redirect to "/squirrels/#{@squirrel.id}"
-        else
-            redirect to '/squirrels'
-        end
+        find_or_redirect_if_not_authorized
+        update_squirrel
+        redirect to "/squirrels/#{@squirrel.id}"
     end
 
     delete '/squirrels/:id' do
-        redirect_if_not_logged_in
-        @squirrel = Squirrel.find(params[:id])
-        user = @squirrel.user
-        if user == current_user
-            @squirrel.destroy
-            redirect to '/squirrels'
-        else
-            redirect to '/squirrels'
-        end
+        find_or_redirect_if_not_authorized
+        delete_squirrel
+        redirect to '/squirrels'
     end
+
+    private
+
+    def logged_in?
+        !!session[:user_id]
+      end
+  
+      def current_user
+          @current_user ||= User.find_by_id(session[:user_id])
+      end
+  
+      def redirect_if_not_logged_in
+        if !logged_in?
+          redirect to '/login'
+        end
+      end
+  
+      def authorized?
+        @squirrel.user == current_user
+      end
+  
+      def redirect_if_not_authorized
+        if !authorized?
+          redirect to '/squirrels'
+        end
+      end
+  
+      def find_squirrel
+        @squirrel = Squirrel.find(params[:id])
+      end
+  
+      def find_or_redirect_if_not_logged_in
+        find_squirrel
+        redirect_if_not_logged_in
+      end
+  
+      def find_or_redirect_if_not_authorized
+        find_squirrel
+        redirect_if_not_authorized
+      end
+
+      def all_squirrels
+        @squirrels = Squirrel.all.includes(:user)
+      end
+
+      def create_squirrel
+        current_user.squirrels.create(params[:squirrel])
+      end
+
+      def update_squirrel
+        @squirrel.update(params[:squirrel])
+      end
+
+      def delete_squirrel
+        @squirrel.destroy
+      end
 end
