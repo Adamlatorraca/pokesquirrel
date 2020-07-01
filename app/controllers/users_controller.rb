@@ -6,6 +6,10 @@ class UsersController < ApplicationController
         set :session_secret, ENV['SECRET']
     end
 
+    get '/' do
+        erb :index
+    end
+
     get '/signup' do
         erb :'users/signup'
     end
