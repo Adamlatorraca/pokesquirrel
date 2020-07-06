@@ -4,9 +4,11 @@ SQUIRREL HUNT!!
 
 Squirrel Hunt is a "gamified" web app where users are tasked with finding and capturing (read: taking a picture) squirrels that they find out and about in the world. Think of it like a lite web app verion of Pokemon GO but way more fun because squirrels are awesome!
 
-Here is placeholder text that will be replaced with a link to my video demo
+Project demo:
+https://www.youtube.com/watch?v=U3Zl1b5kYqk
 
-Here is placeholder text that will be replaced with a link to my blog post
+HTTP Blog Post:
+https://medium.com/@adam.latorraca/http-the-backbone-of-the-web-dd0e5bd4d958
 
 ## Built With
 
